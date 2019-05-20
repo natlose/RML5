@@ -24,5 +24,10 @@ namespace RML_Validation
         {
             InitializeComponent();
         }
+
+        private void Keres_Click(object sender, RoutedEventArgs e)
+        {
+            ((MainWindowVM)DataContext).LoadData();
+        }
     }
 }

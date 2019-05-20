@@ -5,8 +5,79 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:RML_Validation"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
+        Title="MainWindow" SizeToContent="Height" Width="600">
+    <Window.DataContext>
+        <local:MainWindowVM/>
+    </Window.DataContext>
+    <Window.Resources>
+        <Style TargetType="StackPanel">
+            <Setter Property="Margin" Value="5"/>
+        </Style>
+        <Style TargetType="Grid">
+            <Setter Property="Margin" Value="5"/>
+        </Style>
+        <Style TargetType="TextBox">
+            <Setter Property="Margin" Value="5"/>
+            <Setter Property="Padding" Value="0,2"/>
+            <Setter Property="VerticalContentAlignment" Value="Center"/>
+            <Setter Property="Validation.ErrorTemplate">
+                <Setter.Value>
+                    <ControlTemplate>
+                        <DockPanel LastChildFill="True">
+                            <TextBlock DockPanel.Dock="Right" Foreground="Red" FontSize="14" FontWeight="Bold">*</TextBlock>
+                            <Border BorderBrush="Green" BorderThickness="1">
+                                <AdornedElementPlaceholder></AdornedElementPlaceholder>
+                            </Border>
+                        </DockPanel>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+        <Style TargetType="Button">
+            <Setter Property="Margin" Value="5"/>
+            <Setter Property="Padding" Value="20,3"/>
+        </Style>
+    </Window.Resources>
     <Grid>
-        
+        <Grid.RowDefinitions>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+        <StackPanel Orientation="Horizontal">
+            <Label Content="ID:" VerticalAlignment="Center"/>
+            <TextBox Width="50" Text="{Binding IdText}" />
+            <Button Content="Keres" Click="Keres_Click" />
+        </StackPanel>
+        <Grid Grid.Row="1">
+            <Grid.RowDefinitions>
+                <RowDefinition/>
+                <RowDefinition/>
+                <RowDefinition/>
+                <RowDefinition/>
+                <RowDefinition/>
+                <RowDefinition/>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            <Label Content="Címek" />
+            <TextBox Grid.Column="1" Text="{Binding Person.Titles}" />
+            <Label Grid.Row="1" Content="Vezetéknév" />
+            <TextBox Grid.Row="1" Grid.Column="1" Text="{Binding Person.FirstName}" />
+            <Label Grid.Row="2" Content="Keresztnév" />
+            <TextBox Grid.Row="2" Grid.Column="1" Text="{Binding Person.LastName}" />
+            <Label Grid.Row="3" Content="Telefon" />
+            <TextBox Grid.Row="3" Grid.Column="1" Text="{Binding Person.Phone}" />
+            <Label Grid.Row="4" Content="Mobil" />
+            <TextBox Grid.Row="4" Grid.Column="1" Text="{Binding Person.Mobile}" />
+            <Label Grid.Row="5" Content="Email" />
+            <TextBox Grid.Row="5" Grid.Column="1" Text="{Binding Person.Email}" />
+        </Grid>
+        <StackPanel Grid.Row="2" Orientation="Horizontal" HorizontalAlignment="Right">
+            <Button Content="Rögzít"/>
+            <Button Content="Elvet"/>
+        </StackPanel>
     </Grid>
 </Window>
