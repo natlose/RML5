@@ -44,6 +44,7 @@
             <RowDefinition/>
             <RowDefinition/>
             <RowDefinition/>
+            <RowDefinition/>
         </Grid.RowDefinitions>
         <StackPanel Orientation="Horizontal">
             <Label Content="ID:" VerticalAlignment="Center"/>
@@ -76,8 +77,24 @@
             <Label Grid.Row="5" Content="Email" />
             <TextBox Grid.Row="5" Grid.Column="1" Text="{Binding Person.Email}" />
         </Grid>
-        <StackPanel Grid.Row="2" Orientation="Horizontal" HorizontalAlignment="Right">
-            <Button Content="Rögzít" IsEnabled="{Binding Person.HasErrors, Converter={StaticResource NotBoolConverter}, Mode=OneWay}"/>
+        <ListBox x:Name="AddressList" Grid.Row="2" ItemsSource="{Binding Person.Addresses}" HorizontalContentAlignment="Stretch" Margin="5">
+            <ListBox.ItemTemplate>
+                <DataTemplate>
+                    <Border Padding="3" Margin="2" BorderThickness="1" BorderBrush="Black">
+                        <DockPanel LastChildFill="False">
+                            <StackPanel DockPanel.Dock="Left">
+                                <TextBlock Text="{Binding Zip}"/>
+                                <TextBlock Text="{Binding City}"/>
+                                <TextBlock Text="{Binding Line1}"/>
+                            </StackPanel>
+                            <Button DockPanel.Dock="Right" Content="X" Click="CimTorol_Click" />
+                        </DockPanel>
+                    </Border>
+                </DataTemplate>
+            </ListBox.ItemTemplate>
+        </ListBox>
+        <StackPanel Grid.Row="3" Orientation="Horizontal" HorizontalAlignment="Right">
+            <Button Content="Rögzít" IsEnabled="{Binding Person.HasErrors, Converter={StaticResource NotBoolConverter}, Mode=OneWay}" Click="Rogzit_Click"/>
             <Button Content="Elvet" Click="Elvet_Click"/>
         </StackPanel>
     </Grid>

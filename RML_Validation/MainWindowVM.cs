@@ -38,12 +38,17 @@ namespace RML_Validation
             if (Int32.TryParse(idText, out int id))
             {
                 mydata = new MyData();
-                Person result = mydata.Persons.SingleOrDefault(p => p.Id == id);
+                Person result = mydata.Persons.Include(nameof(Person.Addresses)).SingleOrDefault(p => p.Id == id);
                 ValidationErrorsBegin(nameof(IdText));
                 if (result == null) ValidationErrorsAdd("Nem létezik.", nameof(IdText));
                 else Person = result;
                 ValidationErrorsEnd(nameof(IdText));
             }
+        }
+
+        public void RemoveAddress(Address address)
+        {
+            mydata.Addresses.Remove(address);
         }
 
         public void SaveData()

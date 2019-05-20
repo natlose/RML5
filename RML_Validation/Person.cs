@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Text;
 
 namespace RML_Validation
@@ -94,6 +95,6 @@ namespace RML_Validation
             }
         }
 
-        public List<Address> Addresses { get; set; } = new List<Address>();
+        public ObservableCollection<Address> Addresses { get; set; } = new ObservableCollection<Address>();
     }
 }

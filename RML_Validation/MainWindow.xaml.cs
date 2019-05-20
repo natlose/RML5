@@ -34,5 +34,15 @@ namespace RML_Validation
         {
             ((MainWindowVM)DataContext).LoadData();
         }
+
+        private void CimTorol_Click(object sender, RoutedEventArgs e)
+        {
+            ((MainWindowVM)DataContext).RemoveAddress((Address)AddressList.SelectedItem);
+        }
+
+        private void Rogzit_Click(object sender, RoutedEventArgs e)
+        {
+            ((MainWindowVM)DataContext).SaveData();
+        }
     }
 }
