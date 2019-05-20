@@ -29,5 +29,10 @@ namespace RML_Validation
         {
             ((MainWindowVM)DataContext).LoadData();
         }
+
+        private void Elvet_Click(object sender, RoutedEventArgs e)
+        {
+            ((MainWindowVM)DataContext).LoadData();
+        }
     }
 }

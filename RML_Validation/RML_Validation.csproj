@@ -79,6 +79,7 @@
   <ItemGroup>
     <Compile Include="MainWindowVM.cs" />
     <Compile Include="MyData.cs" />
+    <Compile Include="NotBoolConverter.cs" />
     <Compile Include="ObservableObjectBase.cs" />
     <Compile Include="Person.cs" />
     <Compile Include="Properties\AssemblyInfo.cs">

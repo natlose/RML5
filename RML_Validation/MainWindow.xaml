@@ -10,13 +10,14 @@
         <local:MainWindowVM/>
     </Window.DataContext>
     <Window.Resources>
-        <Style TargetType="StackPanel">
+        <local:NotBoolConverter x:Key="NotBoolConverter"/>
+        <Style TargetType="{x:Type StackPanel}">
             <Setter Property="Margin" Value="5"/>
         </Style>
-        <Style TargetType="Grid">
+        <Style TargetType="{x:Type Grid}">
             <Setter Property="Margin" Value="5"/>
         </Style>
-        <Style TargetType="TextBox">
+        <Style TargetType="{x:Type TextBox}">
             <Setter Property="Margin" Value="5"/>
             <Setter Property="Padding" Value="0,2"/>
             <Setter Property="VerticalContentAlignment" Value="Center"/>
@@ -24,16 +25,16 @@
                 <Setter.Value>
                     <ControlTemplate>
                         <DockPanel LastChildFill="True">
-                            <TextBlock DockPanel.Dock="Right" Foreground="Red" FontSize="14" FontWeight="Bold">*</TextBlock>
+                            <TextBlock DockPanel.Dock="Right" Foreground="Red" FontSize="14" FontWeight="Bold"><Run Text="*"/></TextBlock>
                             <Border BorderBrush="Green" BorderThickness="1">
-                                <AdornedElementPlaceholder></AdornedElementPlaceholder>
+                                <AdornedElementPlaceholder/>
                             </Border>
                         </DockPanel>
                     </ControlTemplate>
                 </Setter.Value>
             </Setter>
         </Style>
-        <Style TargetType="Button">
+        <Style TargetType="{x:Type Button}">
             <Setter Property="Margin" Value="5"/>
             <Setter Property="Padding" Value="20,3"/>
         </Style>
@@ -76,8 +77,8 @@
             <TextBox Grid.Row="5" Grid.Column="1" Text="{Binding Person.Email}" />
         </Grid>
         <StackPanel Grid.Row="2" Orientation="Horizontal" HorizontalAlignment="Right">
-            <Button Content="Rögzít"/>
-            <Button Content="Elvet"/>
+            <Button Content="Rögzít" IsEnabled="{Binding Person.HasErrors, Converter={StaticResource NotBoolConverter}, Mode=OneWay}"/>
+            <Button Content="Elvet" Click="Elvet_Click"/>
         </StackPanel>
     </Grid>
 </Window>
