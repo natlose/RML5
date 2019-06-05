@@ -31,8 +31,12 @@ namespace RML_Validation
             {
                 firstName = value;
                 ValidationErrorsBegin();
-                if (String.IsNullOrEmpty(firstName)) ValidationErrorsAdd("Kötelező");
-                if (!String.IsNullOrEmpty(firstName) && firstName.Length > 30) ValidationErrorsAdd("Hossz <= 30");
+                if (String.IsNullOrEmpty(firstName)) ValidationErrorsAdd("üres");
+                if (!String.IsNullOrEmpty(firstName) && firstName.Length > 30) ValidationErrorsAdd("hosszabb mint 30");
+                if (!String.IsNullOrEmpty(firstName) && firstName.Length < 6) ValidationErrorsAdd("rövidebb mint 6");
+                if (!String.IsNullOrEmpty(firstName) && firstName.ToUpper().Contains("IZÉ")) ValidationErrorsAdd("IZÉ-t tartalmaz");
+                if (!String.IsNullOrEmpty(firstName) && firstName.Contains(" ")) ValidationErrorsAdd("szóközt tartalmaz");
+                if (!String.IsNullOrEmpty(firstName) && !firstName.Contains("falvi")) ValidationErrorsAdd("nincs benne falvi");
                 ValidationErrorsEnd();
                 OnPropertyChanged();
             }

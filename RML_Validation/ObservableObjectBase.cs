@@ -38,13 +38,6 @@ namespace RML_Validation
         {
             if (validationErrors[propertyName].Count == 0) validationErrors.Remove(propertyName);
             ErrorsChanged?.Invoke(this, new DataErrorsChangedEventArgs(propertyName));
-            OnPropertyChanged(nameof(HasErrors));
-        }
-
-        protected void ClearValidationErrors([CallerMemberName] string propertyName = null)
-        {
-            validationErrors.Remove(propertyName);
-            ErrorsChanged?.Invoke(this, new DataErrorsChangedEventArgs(propertyName));
         }
         #endregion
 

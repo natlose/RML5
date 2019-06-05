@@ -21,15 +21,18 @@
             <Setter Property="Margin" Value="5"/>
             <Setter Property="Padding" Value="0,2"/>
             <Setter Property="VerticalContentAlignment" Value="Center"/>
+            <!--Szándékosan durva nagy mintát állítok be, hogy érzékelhető legyen:
+                az ErrorTemplate az AdornerLayer-en kerül kirajzolásra,
+                azaz az ablak tartalma fölé feszített átlátszó rétegre-->
             <Setter Property="Validation.ErrorTemplate">
                 <Setter.Value>
                     <ControlTemplate>
-                        <DockPanel LastChildFill="True">
-                            <TextBlock DockPanel.Dock="Right" Foreground="Red" FontSize="14" FontWeight="Bold"><Run Text="*"/></TextBlock>
-                            <Border BorderBrush="Green" BorderThickness="1">
-                                <AdornedElementPlaceholder/>
+                        <StackPanel>
+                            <TextBlock Text="!!HIBA!!" FontSize="18" Foreground="Red" FontWeight="Bold" />
+                            <Border BorderBrush="Red" BorderThickness="5">
+                                <AdornedElementPlaceholder x:Name="adornedTextBox"/>
                             </Border>
-                        </DockPanel>
+                        </StackPanel>
                     </ControlTemplate>
                 </Setter.Value>
             </Setter>
@@ -38,11 +41,17 @@
             <Setter Property="Margin" Value="5"/>
             <Setter Property="Padding" Value="20,3"/>
         </Style>
+        <!--Az EllenorzottSzoveg esetében elnyomom a gyári ErrorTemplate értékét,
+            mert az az egész csoportot bekeretezné pirosan-->
+        <Style TargetType="local:EllenorzottSzoveg">
+            <Setter Property="Validation.ErrorTemplate" Value="{x:Null}"/>
+        </Style>
     </Window.Resources>
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
@@ -93,7 +102,19 @@
                 </DataTemplate>
             </ListBox.ItemTemplate>
         </ListBox>
-        <StackPanel Grid.Row="3" Orientation="Horizontal" HorizontalAlignment="Right">
+        <Border Grid.Row="3" CornerRadius="10" BorderBrush="DarkGray" BorderThickness="1" Padding="10">
+            <StackPanel>
+                <!--
+                    Vedd észre, hogy úgy tudunk az általunk létrehozott Cimke és Szoveg tulajdonságokra hivatkozni,
+                    mintha "gyáriak" lennének. Tedd rá a kurzort az EllenorzottSzoveg-ra és nézd meg a Properties ablakban! (F4)
+                    Ez azért lehetséges, mert ezeket DependencyProperty-nek definiáltuk.
+                -->
+                <local:EllenorzottSzoveg Cimke="Címek" Szoveg="{Binding Person.Titles}"/>
+                <local:EllenorzottSzoveg Cimke="Vezetéknév" Szoveg="{Binding Person.FirstName}"/>
+                <local:EllenorzottSzoveg Cimke="Keresztnév" Szoveg="{Binding Person.LastName}"/>
+            </StackPanel>            
+        </Border>
+        <StackPanel Grid.Row="4" Orientation="Horizontal" HorizontalAlignment="Right">
             <Button Content="Rögzít" IsEnabled="{Binding Person.HasErrors, Converter={StaticResource NotBoolConverter}, Mode=OneWay}" Click="Rogzit_Click"/>
             <Button Content="Elvet" Click="Elvet_Click"/>
         </StackPanel>
