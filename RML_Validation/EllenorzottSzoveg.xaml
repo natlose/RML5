@@ -8,6 +8,10 @@
              d:DesignHeight="450" d:DesignWidth="800">
     <UserControl.Resources>
         <BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter"/>
+        <!--Elnyomom a gyári ErrorTemplate értékét, mert az az egész csoportot bekeretezné pirosan-->
+        <Style TargetType="local:EllenorzottSzoveg">
+            <Setter Property="Validation.ErrorTemplate" Value="{x:Null}"/>
+        </Style>
     </UserControl.Resources>
     <!--
         Az itt alkalmazott különféle Binding kifejezésekről bővebben olvashatsz itt: https://docs.microsoft.com/en-us/dotnet/framework/wpf/data/data-binding-overview
@@ -20,13 +24,11 @@
         Margin="0"
     >
         <Label 
-            x:Name="Label" 
             Content="{Binding Path=Cimke}"
             FontFamily="Arial Narrow"
             FontSize="10"
             Margin="0,0,0,-3"/>
         <TextBox 
-            x:Name="TextBox" 
             Text="{Binding Path=Szoveg}" 
             FontFamily="Consolas" 
             FontSize="18"

@@ -41,11 +41,6 @@
             <Setter Property="Margin" Value="5"/>
             <Setter Property="Padding" Value="20,3"/>
         </Style>
-        <!--Az EllenorzottSzoveg esetében elnyomom a gyári ErrorTemplate értékét,
-            mert az az egész csoportot bekeretezné pirosan-->
-        <Style TargetType="local:EllenorzottSzoveg">
-            <Setter Property="Validation.ErrorTemplate" Value="{x:Null}"/>
-        </Style>
     </Window.Resources>
     <Grid>
         <Grid.RowDefinitions>
